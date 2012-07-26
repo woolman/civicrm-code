@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+
+<CaseType>
+  <name>Prospective Student</name>
+
+  <ActivityTypes>
+
+    <ActivityType>
+      <name>Open Case</name>
+      <max_instances>1</max_instances>
+    </ActivityType>
+
+    <ActivityType>
+      <name>Facebook Friendship Confirmed</name>
+      <max_instances>1</max_instances>
+    </ActivityType>
+
+    <ActivityType>
+      <name>Communication from Student</name>
+    </ActivityType>
+
+    <ActivityType>
+      <name>Send More Info</name>
+    </ActivityType>
+
+    <ActivityType>
+      <name>Follow up</name>
+    </ActivityType>
+
+    <ActivityType>
+      <name>Email</name>
+    </ActivityType>
+
+    <ActivityType>
+      <name>Semester Preference</name>
+      <max_instances>1</max_instances>
+    </ActivityType>
+
+    <ActivityType>
+      <name>Change Case Type</name>
+    </ActivityType>
+
+    <ActivityType>
+      <name>Change Case Status</name>
+    </ActivityType>
+
+  </ActivityTypes>
+
+  <ActivitySets>
+    <ActivitySet>
+      <name>standard_timeline</name>
+      <label>Standard Timeline</label>
+      <timeline>true</timeline>
+
+      <ActivityTypes>
+        <ActivityType>
+          <name>Open Case</name>
+          <status>Completed</status>
+        </ActivityType>
+
+      </ActivityTypes>
+    </ActivitySet>
+  </ActivitySets>
+  
+  <CaseRoles>
+  
+    <RelationshipType>
+        <name>Primary Admissions Rep for</name>
+        <creator>1</creator>
+        <manager>1</manager>
+    </RelationshipType>
+    
+    <RelationshipType>
+        <name>School/org contact person for</name>
+    </RelationshipType>
+    
+ </CaseRoles>
+</CaseType>
