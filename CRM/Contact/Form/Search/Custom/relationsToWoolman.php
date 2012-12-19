@@ -31,10 +31,10 @@ class CRM_Contact_Form_Search_Custom_relationsToWoolman
         );
         $form->addElement('select', 'woolman', 'Relationship To Woolman:', $woolman);
         
-        $this_year = date('Y');
-        for ($y = 2004; $y <= $this_year; ++$y) {
+        $next_year = date('Y') + 1;
+        for ($y = 2004; $y <= $next_year; ++$y) {
           for ($s = 1; $s < 7; $s += 5) {
-            if ($y == $this_year && $s == 1 && date('n') < 6) {
+            if ($y == $next_year && $s == 1 && date('n') < 6) {
               continue;
             }
             $label = $y . ($s == 1 ? ' Spring' : ' Fall');
