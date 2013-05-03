@@ -112,8 +112,7 @@ class CRM_Contact_Form_Search_Custom_eventParticipantRelations
         return null;
     }
 
-    function all( $offset = 0, $rowcount = 0, $sort = null,
-                  $includeContactIDs = false ) {
+    function all($offset = 0, $rowcount = 0, $sort = NULL, $includeContactIDs = FALSE, $justIDs = FALSE) {
 
         $selectClause = "contact_a.id  as contact_id,
                          contact_a.contact_type as contact_type,
