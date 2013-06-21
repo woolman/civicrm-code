@@ -497,13 +497,13 @@ class CRM_Report_Form_Contribute_CallSheets extends CRM_Report_Form {
         FROM civicrm_contribution cc
         LEFT JOIN civicrm_value_contribution_accounts_10 ca ON ca.entity_id = cc.id
         LEFT JOIN civicrm_option_value ov ON ca.account_18 = ov.value AND ov.option_group_id = 103
-        WHERE cc.is_test = 0 AND cc.contribution_type_id = 1 AND cc.contribution_status_id = 1
+        WHERE cc.is_test = 0 AND cc.financial_type_id = 1 AND cc.contribution_status_id = 1
         ORDER BY cc.receive_date DESC
         ) a
       INNER JOIN (
         SELECT contact_id, MAX(receive_date) AS receive_date, MIN(receive_date) AS first_contribution_date, ROUND(AVG(total_amount)) AS total_amount, COUNT(id) as number_of
         FROM civicrm_contribution
-        WHERE is_test = 0 AND contribution_type_id = 1 AND contribution_status_id = 1
+        WHERE is_test = 0 AND financial_type_id = 1 AND contribution_status_id = 1
         GROUP BY contact_id
       ) b ON a.contact_id = b.contact_id
       GROUP BY a.contact_id)");
