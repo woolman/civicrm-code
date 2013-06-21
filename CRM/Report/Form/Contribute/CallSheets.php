@@ -430,7 +430,8 @@ class CRM_Report_Form_Contribute_CallSheets extends CRM_Report_Form {
        IF (r.is_active AND (r.end_date > CURDATE() OR r.end_date IS NULL), '', 'Past ') AS past, r.start_date, r.end_date
        FROM civicrm_relationship r, civicrm_contact c, civicrm_relationship_type t
        WHERE c.id = r.second AND t.id = r.relationship_type_id AND r.case_id IS NULL
-       AND c.contact_type <> 'Household' AND r.relationship_type_id NOT IN (13,14,19)";
+       AND c.contact_type <> 'Household' AND r.relationship_type_id NOT IN (13,14,19)
+       AND c.is_deleted <> 1";
        CRM_Core_DAO::executeQuery(
        "CREATE TEMPORARY TABLE $tempTable
        (" . str_replace(array('first', 'second'), array('contact_id_a', 'contact_id_b'), $query) . ")");
