@@ -274,7 +274,7 @@ class CRM_Report_Form_Contribute_CallSheets extends CRM_Report_Form {
         $this->buildRows ( $sql, $rows );
         $this->formatDisplay( $rows );
 
-        if ( FALSE && in_array( $this->_outputMode, array( 'print', 'pdf' ) ) ) {
+        if ( in_array( $this->_outputMode, array( 'print', 'pdf' ) ) ) {
 
             // Special formatting for print
             foreach ($rows as &$r) {
