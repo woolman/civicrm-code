@@ -388,17 +388,18 @@ class CRM_Report_Form_Contribute_CallSheets extends CRM_Report_Form {
      */
     function getActivityJoin(){
         return " LEFT JOIN (
-          SELECT CONCAT(IF(act.activity_type_id = 62, 'Call', 'Visit'), ' by ', cc.display_name, ' on ', DATE_FORMAT(act.activity_date_time, '%b %D, %Y'), ': <em>', ov.label, '</em>') AS activity, at.target_contact_id AS contact_id, act.details
+          SELECT CONCAT(IF(act.activity_type_id = 62, 'Call', 'Visit'), ' by ', cc.display_name, ' on ', DATE_FORMAT(act.activity_date_time, '%b %D, %Y'), ': <em>', ov.label, '</em>') AS activity, at.contact_id AS contact_id, act.details
           FROM civicrm_activity act
-          INNER JOIN civicrm_contact cc ON cc.id = act.source_contact_id
-          INNER JOIN civicrm_activity_target at ON at.activity_id = act.id
+          INNER JOIN civicrm_activity_contact source ON source.activity_id = act.id AND source.record_type_id = 2
+          INNER JOIN civicrm_contact cc ON cc.id = source.contact_id
+          INNER JOIN civicrm_activity_contact at ON at.activity_id = act.id AND at.record_type_id = 3
           LEFT JOIN civicrm_value_donor_interaction_15 di ON di.entity_id = act.id
           LEFT JOIN civicrm_option_value ov ON ov.option_group_id = 115 AND ov.value = di.call_results_53
           WHERE act.id IN (
             SELECT a.id
-            FROM civicrm_activity a, civicrm_activity_target t
-            WHERE a.id = t.activity_id AND a.activity_type_id IN (62,65)
-            GROUP BY t.target_contact_id
+            FROM civicrm_activity a, civicrm_activity_contact t
+            WHERE a.id = t.activity_id AND a.activity_type_id IN (62,65) AND t.record_type_id = 3
+            GROUP BY t.contact_id
             HAVING activity_date_time = MAX(activity_date_time)
           )
         ) {$this->_aliases['civicrm_activity']} ON {$this->_aliases['civicrm_contact']}.id = {$this->_aliases['civicrm_activity']}.contact_id \n";
